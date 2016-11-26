@@ -1,6 +1,12 @@
-html, body {
-    background-color: #ff8a00;
+html {
     height: 100%;
+}
+body {
+    background-image: url('../img/background.png');
+    background-size: cover;
+    background-repeat:no-repeat;
+    height: 100%;
+    padding-top: 4%;
 }
 
 .fill {
@@ -17,11 +23,23 @@ html, body {
 #dance {
     margin: 4%;
     height: 92%;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.67);
+}
+#dance > img {
+    display: block;
+    margin: auto;
+    height: 80%;
 }
 
 #question {
     height: 30%;
+}
+
+#question > h1, p {
+    font-weight: bold;
+    font-size: 30px;
+    text-shadow: #fff 2px 2px 0px, #fff -2px 2px 0px,
+    #fff 2px -2px 0px, #fff -2px -2px 0px;
 }
 
 .question {
@@ -45,9 +63,15 @@ html, body {
 #action {
     height: 10%;
 }
+#action > img {
+    margin: 1%;
+    width: 30%;
+}
 
 #phrase {
     margin: 20px;
-    background-color: #f9f;
+    height: 10%;
+    border: 2px solid #7ac9f6;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
