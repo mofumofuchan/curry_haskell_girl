@@ -10,27 +10,27 @@ DATABASE = './curry_haskell_girl.db'
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-#connect
+
+""" ----- quiz ----- """
+""" ----- SQL ----- """
 def connect_db():
    return sqlite3.connect(app.config['DATABASE'])
 
-#init
 def init_db():
-   with closing(connect_db()) as db:
-       with app.open_resource('schema.sql', mode='r') as f:
-           db.cursor().executescript(f.read())
-       db.commit()
-
-@app.before_request
-def before_request():
-   g.db = connect_db()
-
+    with closing(connect_db()) as db:
+        with app.open_resource('schema.sql', mode='r') as f:
+            db.cursor().executescript(f.read())
+        db.commit()
 
 @app.teardown_request
 def teardown_request(exeption):
    db = getattr(g, 'db', None)
    if db is not None:
        db.close()
+
+@app.before_request
+def before_request():
+   g.db = connect_db()
 
 def consumes(content_type):
     def _consumes(function):
@@ -45,16 +45,18 @@ def consumes(content_type):
     return _consumes
 
 
+#root
 @app.route('/')
 def index():
     return render_template('index.html', name="test", title="hello")
 
 
+#quiz_page
 @app.route('/quiz/', methods=['POST'])
-def quiz_paee():
+def quiz_page():
     return render_template('')
 
-
+#request_quiz_anser_judg
 @app.route('/answer/', methods=['POST'])
 @consumes('application/json')
 def quiz_answer():
@@ -73,6 +75,27 @@ def quiz_answer():
 def quiz_true(id):
     g.db.execute("update user_ans set result_flag=? where quiz_id=?", (1, id))
     g.db.commit()
+
+
+#request_quiz
+@app.route('/request/', methods=['POST'])
+@consumes('application/json')
+def request_quiz():
+    data = {
+        "quiz_id": request.json['quiz_id']
+    }
+    print(data)
+    cursor = g.db.cursor()
+    cursor.execute("select * from quiz where quiz_id=?", (data['quiz_id'], ))
+    tmp = cursor.fetchone()
+    request_data = {
+        "quiz_id": tmp[0],
+        "quiz_name": tmp[1],
+        "quiz_text": tmp[2],
+        "quiz_hint": tmp[3],
+    }
+    response = json.dumps(request_data, ensure_ascii=False, sort_keys=False)
+    return Response(response, mimetype='application/json')
 
 
 if __name__ == '__main__':
