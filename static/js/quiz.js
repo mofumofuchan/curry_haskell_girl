@@ -36,7 +36,7 @@ $(function() {
 				if (responce_data['user_problem_ans'] == true) {
 					document.getElementById("phrase").textContent = "HelloWorld";
 					document.getElementById("charactor").src="../static/img/test0.gif";
-					alert("responce: true");
+					alert("正解だよ！");
 				} else {
 					alert("responce: false");
 				}
