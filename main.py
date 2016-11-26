@@ -3,6 +3,7 @@ from flask import Flask, render_template, Response, request, abort
 from server.evalProblem import EvalProblem
 from functools import wraps
 import codecs
+import json
 
 app = Flask(__name__)
 
@@ -35,14 +36,11 @@ def quiz_paee():
 def quiz_answer():
     print(codecs.decode(request.data, 'utf-8'))
     data = eval(codecs.decode(request.data, 'utf-8'))
-    # print(request.json())
-    # data = eval(request.json)
-    print(type(data['src']))
-    # flag = EvalProblem(data['src']).eval()
     flag = EvalProblem(data['src']).eval()
-    print(flag)
-    return flag
+    data['user_problem_ans'] = flag
+    response = json.dumps(data, ensure_ascii=False, sort_keys=True)
+    return Response(response, mimetype='application/json')
 
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    app.run(host="0.0.0.0", port=8080, debug=True)
