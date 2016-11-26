@@ -25,13 +25,21 @@
 
   </head>
 
-  <body>
+  <body onload="Simple()">
     <!-- 2 columns of equal width -->
     <div class="grid fill">
       <div class="col span-6 fill">
         <div id="dance">
-          <img id="character" src="../static/img/test1.png" alt="">
-          <div id="phrase"></div>
+	  <!-- Live2D Library -->
+	  <script src="../static/js/live2d.min.js"></script>
+	  <!-- User's Script -->
+	  <script src="../static/js/Simple.js"></script>
+	  <!-- <script>Simple();</script> -->
+	  <canvas id="glcanvas" width = "512px" height="512px" style="border:dashed 1px #CCC"></canvas>
+	  <!--
+	  <img id="character" src="../static/img/test1.png" alt="">
+          -->
+	  <div id="phrase"></div>
         </div>
       </div>
       <div class="col span-6 fill">
@@ -55,9 +63,8 @@
     <script src="../static/js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/js/toolkit.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
-
-		<script src="../static/js/quiz.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
+    <script src="../static/js/quiz.js"></script>
 
 
   </body>

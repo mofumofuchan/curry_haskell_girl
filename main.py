@@ -53,7 +53,6 @@ def consumes(content_type):
 def index():
     return render_template('index.html', name="test", title="hello")
 
-
 #quiz_page
 @app.route('/quiz/<int:quiz_id>/', methods=['GET'])
 def quiz_page(quiz_id):
@@ -63,6 +62,13 @@ def quiz_page(quiz_id):
     print(quiz)
     return render_template('quiz.html', quiz_text=quiz[2], quiz_hint=quiz[3])
 
+    
+@app.route('/sample')
+def sample():
+    return render_template('simple2.html')
+
+
+    
 #request_quiz_anser_judg
 @app.route('/answer/', methods=['POST'])
 @consumes('application/json')
