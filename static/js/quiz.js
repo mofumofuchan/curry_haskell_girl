@@ -23,7 +23,7 @@ $(function() {
 		var src = editor.getValue();
 		var id = '0';
 		var send_data = {id:id, src:src};
-		
+
 		alert("ためすよ！");
 		// document.getElementById("character").src="../static/img/test0.gif";
 		
@@ -33,12 +33,12 @@ $(function() {
 			url: "/answer/",
 			data: JSON.stringify(send_data),
 			success: function(responce_data) {
-				alert(responce_data);
-				console.log(responce_data);
+				// alert(responce_data);
+				// console.log(responce_data);
 				
 				if (responce_data['user_problem_ans'] == true) {
 					document.getElementById("phrase").textContent = "HelloWorld";
-					document.getElementById("charactor").src="../static/img/test0.gif";
+					document.getElementById("character").src="../static/img/test0.gif";
 					alert("正解だよ！");
 				} else {
 					alert("responce: false");
