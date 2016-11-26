@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ace Editor sample</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <button id="btn" >push</button>
+    <div id="editor" style="height: 400px"></div>
+    <div id="hukidashi" style="width:400px; height:100px; background-color:orange" >書き換えられる</div>
+
+    <script>
+     var editor = ace.edit("editor");
+
+     $('#btn').click( function() {
+       var content = editor.getValue();
+       alert(content);
+
+       var send_data = {id:0, src:content};
+
+       document.getElementById("hukidashi").textContent = "書き換わったよ！！！";
+       
+       $.ajax({
+	 type: "POST",
+	 url: "ikuzus.cloudapp.net:8080",
+	 dataType: "application/json",
+	 data: send_data,
+	 success: function(msg){
+	   alert(msg);
+	 }
+      });
+     });
+    
+    </script>
+    
+  </body>
+</html>
