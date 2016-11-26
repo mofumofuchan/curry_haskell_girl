@@ -34,13 +34,14 @@ def quiz_paee():
 @app.route('/answer/', methods=['POST'])
 @consumes('application/json')
 def quiz_answer():
-    print(codecs.decode(request.data, 'utf-8'))
-    data = eval(codecs.decode(request.data, 'utf-8'))
+    data = {
+        'id': request.json['id'],
+        'src': request.json['src']
+    }
     flag = EvalProblem(data['src']).eval()
     data['user_problem_ans'] = flag
     response = json.dumps(data, ensure_ascii=False, sort_keys=True)
     return Response(response, mimetype='application/json')
-
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080, debug=True)
