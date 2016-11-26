@@ -39,34 +39,26 @@
           <p>下のコードをうめて、しゃべらせてみよう</p>
         </div>
         <div id="code">
-          <div id="editor">if __name__ == "__main__":
-  print("Hello world")
+          <div id="editor">
           </div>
         </div>
         <div id="action">
-          <button>もどる</button>
-          <button>やり直す</button>
-          <button>ためす</button>
+          <button id="back">もどる</button>
+          <button id="reset">やり直す</button>
+          <button id="judge">ためす</button>
         </div>
       </div>
     </div>
 
     <!-- jQuery -->
     <script src="../static/js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/js/toolkit.min.js"></script>
-    <script src="../static/js/quiz.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/monokai");
-editor.setFontSize(14);
-editor.getSession().setMode("ace/mode/python");
-editor.getSession().setUseWrapMode(true);
-editor.getSession().setTabSize(2);
-    </script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
 
+		<script src="../static/js/quiz.js"></script>
+		
+		
   </body>
 
 </html>
