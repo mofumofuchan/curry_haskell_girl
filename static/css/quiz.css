@@ -45,3 +45,9 @@ html, body {
 #action {
     height: 10%;
 }
+
+#phrase {
+    margin: 20px;
+    background-color: #f9f;
+}
+
