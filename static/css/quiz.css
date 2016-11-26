@@ -1,0 +1,47 @@
+html, body {
+    background-color: #ff8a00;
+    height: 100%;
+}
+
+.fill {
+    height: 100%;
+}
+#editor {
+    position: absolute;
+    top: 30%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 60%;
+}
+#dance {
+    margin: 4%;
+    height: 92%;
+    background-color: #fff;
+}
+
+#question {
+    height: 30%;
+}
+
+.question {
+    height: 100%;
+}
+.question > .q1{
+    background-color: #6fea44;
+}
+.question > .q2{
+    background-color: #6fea44;
+}
+.question > .q3{
+    height: 100%;
+    background-color: #6fea44;
+}
+
+#code {
+    height: 60%;
+}
+
+#action {
+    height: 10%;
+}
