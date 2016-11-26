@@ -50,9 +50,9 @@ var Simple = function() {
     this.modelDef = {
         "type":"Live2D Model Setting",
         "name":"Aikatsu",
-        "model":"/static/assets/model0.2048/model0.moc",
+        "model":"/static/assets/model0.2048/model.moc",
         "textures":[
-            "/static/assets/model0.2048/model0.2048/texture_00.png",
+            "/static/assets/model0.2048/model.2048/texture_00.png",
         ]
     };
 
@@ -60,8 +60,10 @@ var Simple = function() {
     Live2D.init();
 
     // canvasオブジェクトを取得
-    var canvas = document.getElementById("glcanvas");
-
+  canvas = $("#glcanvas").get(0);
+  
+  console.log(canvas);
+  
     // コンテキストを失ったとき
     canvas.addEventListener("webglcontextlost", function(e) {
         Simple.myerror("context lost");
@@ -275,18 +277,20 @@ Simple.loadBytes = function(path , callback)
 /*
 * 画面ログを出力
 */
-Simple.mylog = function(msg/*string*/)
+
+ Simple.mylog = function(msg/*string*/)
 {
-    var myconsole = document.getElementById("myconsole");
-    myconsole.innerHTML = myconsole.innerHTML + "<br>" + msg;
-    console.log(msg);
+  // var myconsole = document.getElementById("myconsole");
+  // myconsole.innerHTML = myconsole.innerHTML + "<br>" + msg;
+  console.log(msg);
 };
+
 
 /*
 * 画面エラーを出力
 */
 Simple.myerror = function(msg/*string*/)
 {
-    console.error(msg);
+    // console.error(msg);
     Simple.mylog( "<span style='color:red'>" + msg + "</span>");
 };
