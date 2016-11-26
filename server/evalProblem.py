@@ -10,10 +10,15 @@ class EvalProblem(object):
     def eval(self):
         try:
             exec(self.data)
-        except IOError:
-            print('--------------------------------------------')
-            print(traceback.format_exc(sys.exc_info()[2]))
-            print('--------------------------------------------')
+        except SyntaxError:
+            # print('--------------------------------------------')
+            # print(traceback.format_exc(sys.exc_info()[2]))
+            # print('--------------------------------------------')
+            return False
+        except TypeError:
+            # print('--------------------------------------------')
+            # print(traceback.format_exc(sys.exc_info()[2]))
+            # print('--------------------------------------------')
             return False
         else:
             return True
