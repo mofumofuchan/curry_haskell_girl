@@ -22,7 +22,7 @@ $(function() {
 	function judgeSource() {
 		var src = editor.getValue();
 		var id = '0';
-		var send_data = {id:id, src:src};
+		var send_data = {quiz_id:id, src:src};
 
 		$.ajax({
 			contentType: 'application/json',

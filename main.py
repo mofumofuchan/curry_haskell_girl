@@ -4,7 +4,6 @@ from contextlib import closing
 from server.evalProblem import EvalProblem
 from functools import wraps
 import sqlite3
-import csv
 import json
 
 DATABASE = './curry_haskell_girl.db'
