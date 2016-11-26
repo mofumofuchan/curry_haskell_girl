@@ -2,7 +2,6 @@
  * テキストエディタと，ソースの送受信，答え合わせ
  */
 $(function() {
-		$.getScript("https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js");
 		var editor = ace.edit("editor");
 		editor.setTheme("ace/theme/monokai");
 		editor.setFontSize(14);
@@ -10,12 +9,20 @@ $(function() {
 		editor.getSession().setUseWrapMode(true);
 		editor.getSession().setTabSize(2);
 
-		$('#judge').click(function () {alert("let's judge!")});
+		var initSrc = 'if __name__ == "__main__":\n  print("Hello world")';
+		editor.setValue(initSrc); 
+		
+		$('#back').click(function() {alert("back index pages")});
+		$('#reset').click(function() {editor.setValue(initSrc)});
+		$('#judge').click(function() {judgeSource();});
 
-		function my_func() {
+		function judgeSource() {
 				var src = editor.getValue();
 				var id = '0';
 				var send_data = {id:id, src:src};
+
+				// debug
+				alert("ためすよ！");
 				
 				$.ajax({
 						contentType: 'application/json',
@@ -34,6 +41,8 @@ $(function() {
 						},
 						dataType: "json"
 				});
+
+				document.getElementById("dance").textContent = "評価したよ！";
 
 		}
  });
