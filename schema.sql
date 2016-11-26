@@ -9,6 +9,10 @@ create table quiz(
 
 create table user (
   user_id integer primary key autoincrement,
-  user_name stirng not null,
-  user_answers string not null
+  user_name stirng not null
+);
+
+create table answers (
+  user_id integer not null,
+  answered integer not null
 );
