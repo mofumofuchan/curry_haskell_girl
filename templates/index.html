@@ -24,10 +24,21 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    
+    <style type="text/css" media="screen">
+     #editor { 
+       position: absolute;
+       top: 50%;
+       right: 0;
+       height: 70%;
+       bottom: 0;
+       left: 0;
+     }
+    </style>
+    
 </head>
 
 <body>
-
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -42,8 +53,9 @@
                     <div class="col-lg-12">
                         <h1>問題</h1>
                     </div>
-                    <div class="col-lg-12">
-                        <h1>コード</h1>
+		    <!-- Editor -->
+                    <div class="col-lg-12" id="editor">if __name__ == "__main__":
+		      print("Hello world")
                     </div>
                     <div class="col-lg-12">
                         <h1>ボタン</h1>
@@ -62,6 +74,19 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/js/bootstrap.min.js"></script>
 
+    <!-- ACE: Web IDE -->
+    <!--
+    <script src="../static/js/ace.js"></script>
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
+    <script>
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/monokai");
+      editor.setFontSize(14);
+      editor.getSession().setMode("ace/mode/python");
+      editor.getSession().setUseWrapMode(true);
+      editor.getSession().setTabSize(2);
+    </script>
 </body>
 
 </html>
