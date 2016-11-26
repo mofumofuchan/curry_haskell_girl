@@ -20,7 +20,7 @@
      var id = 0;
 
      var send_data = {id:id, src:src};
-
+g
      function my_func() {  
        $.post("localhost:12345", send_data,
               function(responce_data) {

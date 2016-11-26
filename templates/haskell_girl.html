@@ -10,7 +10,6 @@
        bottom: 20%;
        left: 0;
      }
-
     </style>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     
@@ -21,23 +20,33 @@
 
      var send_data = {id:id, src:src};
 
-     function my_func() {  
-       $.post("localhost:12345", send_data,
+     function my_func() {
+       alert("my_func");
+       console.log(send_data);
+       
+       $.post("localhost:5000", send_data,
               function(responce_data) {
 		alert(responce_data);
+
+		// responce_dataをパース
 		
-		if (responce_data == true) {
+		if (responce_data == true) { 
 		  alert("responce: true");
 		} else {
 		  alert("responce: false");
 		}	
               }
        );
+       
      };
+     
+     
     </script>
 
   </head>
   <body>
+
+
     <input type="submit" id="sendSrc" value="send src" onClick="my_func()">
         
     <div id="editor">if __name__ == "__main__":
@@ -53,6 +62,6 @@
      editor.getSession().setUseWrapMode(true);
      editor.getSession().setTabSize(2);
     </script>
-    
+
   </body>
 </html>
