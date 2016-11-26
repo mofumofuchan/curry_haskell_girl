@@ -2,6 +2,9 @@
  * テキストエディタと，ソースの送受信，答え合わせ
  */
 $(function() {
+	$("<img>").attr("src", "../static/img/test0.gif");
+	$("<img>").attr("src", "../static/img/test1.png");
+	
 	var editor = ace.edit("editor");
 	editor.setTheme("ace/theme/monokai");
 	editor.setFontSize(14);
