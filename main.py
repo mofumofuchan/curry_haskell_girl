@@ -6,7 +6,7 @@ from functools import wraps
 import sqlite3
 import json
 
-DATABASE = '/home/whiled/programs/curry_haskell_girl/curry_haskell_girl.db'
+DATABASE = './curry_haskell_girl.db'
 app = Flask(__name__)
 app.config.from_object(__name__)
 
