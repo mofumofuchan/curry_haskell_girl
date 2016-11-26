@@ -9,9 +9,8 @@ class EvalProblem(object):
 
     def eval(self):
         try:
-            result = exec(self.data)
-            print(result)
-        except Exception:
+            exec(self.data)
+        except IOError:
             print('--------------------------------------------')
             print(traceback.format_exc(sys.exc_info()[2]))
             print('--------------------------------------------')

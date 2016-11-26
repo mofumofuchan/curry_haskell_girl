@@ -1,22 +1,48 @@
-#coding:utf-8
-from flask import Flask, render_template
+# coding:utf-8
+from flask import Flask, render_template, Response, request, abort
+from server.evalProblem import EvalProblem
+from functools import wraps
+import codecs
 
-app = Flask(__name__);
+app = Flask(__name__)
+
+
+def consumes(content_type):
+    def _consumes(function):
+        @wraps(function)
+        def __consumes(*argv, **keywords):
+            if request.headers['Content-Type'] != content_type:
+                abort(400)
+            return function(*argv, **keywords)
+
+        return __consumes
+
+    return _consumes
+
 
 @app.route('/')
 def index():
-   return render_template('index.html', name="test", title="hello")
+    return render_template('index.html', name="test", title="hello")
 
-'''
-@app.route('/quiz', methods=['POST'])
+
+@app.route('/quiz/', methods=['POST'])
 def quiz_paee():
     return render_template('')
 
-@app.route('/answer')
+
+@app.route('/answer/', methods=['POST'])
+@consumes('application/json')
 def quiz_answer():
-    ''' '''
-    return
-'''
+    print(codecs.decode(request.data, 'utf-8'))
+    data = eval(codecs.decode(request.data, 'utf-8'))
+    # print(request.json())
+    # data = eval(request.json)
+    print(type(data['src']))
+    # flag = EvalProblem(data['src']).eval()
+    flag = EvalProblem(data['src']).eval()
+    print(flag)
+    return flag
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(port=8080)
