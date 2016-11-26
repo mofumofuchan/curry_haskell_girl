@@ -2,6 +2,7 @@
 from flask import Flask, render_template, Response, request, abort
 from server.evalProblem import EvalProblem
 from functools import wraps
+import codecs
 
 app = Flask(__name__)
 
@@ -24,17 +25,22 @@ def index():
     return render_template('index.html', name="test", title="hello")
 
 
-@app.route('/quiz', methods=['POST'])
+@app.route('/quiz/', methods=['POST'])
 def quiz_paee():
     return render_template('')
 
 
-@app.route('/answer', methods=['POST'])
-@consumes
+@app.route('/answer/', methods=['POST'])
+@consumes('application/json')
 def quiz_answer():
-    src = request.json['src']
-    flag = EvalProblem(src).eval()
+    # data = eval(codecs.decode(request.data, 'utf-8'))
+    print(request.data)
+    data = eval(request.json)
+    print(request.data)
+    # flag = EvalProblem(data['src']).eval()
+    flag = EvalProblem(data['src']).eval()
     print(flag)
+    return flag
 
 
 if __name__ == '__main__':
