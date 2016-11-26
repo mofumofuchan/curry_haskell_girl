@@ -4,11 +4,15 @@ from contextlib import closing
 from server.evalProblem import EvalProblem
 from functools import wraps
 import sqlite3
+import csv
 import json
 
 DATABASE = './curry_haskell_girl.db'
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+USER_ID = 1
+TRUE_NUMBER = 1
 
 
 """ ----- quiz ----- """
@@ -61,21 +65,26 @@ def quiz_page():
 @consumes('application/json')
 def quiz_answer():
     data = {
-        'id': request.json['id'],
+        'quiz_id': request.json['quiz_id'],
         'src': request.json['src']
     }
     flag = EvalProblem(data['src']).eval()
     if flag:
-        quiz_true(data['id'])
+        quiz_true(USER_ID, data['quiz_id'])
 
     data['user_problem_ans'] = flag
     response = json.dumps(data, ensure_ascii=False, sort_keys=True)
     return Response(response, mimetype='application/json')
 
-def quiz_true(id):
-    g.db.execute("update user_ans set result_flag=? where quiz_id=?", (1, id))
-    g.db.commit()
-
+def quiz_true(user_id, quiz_id):
+    cursor = g.db.cursor()
+    cursor.execute("select answered from answers where user_id=?", (user_id,))
+    tmp = cursor.fetchone()
+    if tmp is None:
+        g.db.execute("insert into answers('user_id','answered') values(?, ?)", (user_id, quiz_id))
+        g.db.commit()
+    else:
+        print("ok")
 
 #request_quiz
 @app.route('/request/', methods=['POST'])
