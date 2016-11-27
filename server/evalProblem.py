@@ -1,7 +1,6 @@
 # coding:utf-8
 import sys
 import traceback
-import subprocess
 
 
 def create_file():
@@ -17,6 +16,8 @@ class EvalProblem(object):
         try:
             create_file()
             exec(self.src)
+            sys.stdout.close()
+            sys.stdout = sys.__stdout__
         except SyntaxError:
             # print('--------------------------------------------')
             print(traceback.format_exc(sys.exc_info()[2]))
@@ -29,6 +30,7 @@ class EvalProblem(object):
             return False
         else:
             with open("tmp.txt", "r", encoding='utf-8') as read_file:
-                if self.answer == read_file.readline():
+                if self.answer == read_file.read().strip():
+
                     return True
             return False
