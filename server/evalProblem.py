@@ -30,7 +30,6 @@ class EvalProblem(object):
             return False
         else:
             with open("tmp.txt", "r", encoding='utf-8') as read_file:
-                if self.answer == read_file.read().strip():
-
+                if self.answer in read_file.read().strip():
                     return True
             return False
