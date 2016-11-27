@@ -6,6 +6,8 @@ import traceback
 def create_file():
     sys.stdout = open("tmp.txt", "w", encoding='utf-8')
 
+def shake():
+    pass
 
 class EvalProblem(object):
     def __init__(self, id, src, database):
@@ -16,6 +18,7 @@ class EvalProblem(object):
 
     def eval(self):
         try:
+
             create_file()
             exec(self.src)
             sys.stdout.close()
@@ -35,6 +38,6 @@ class EvalProblem(object):
             tmp = self.dbc.execute("select quiz_ans from quiz where quiz_id=?", (self.id,))
             ans = ''.join(tmp.fetchone())
             with open("tmp.txt", "r", encoding='utf-8') as read_file:
-                if ans == read_file.read().strip():
+                if read_file.read().strip() == ans:
                     return True
             return False

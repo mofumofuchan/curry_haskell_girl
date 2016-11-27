@@ -83,7 +83,7 @@ def quiz_answer():
         'src': request.json['src']
     }
     flag = EvalProblem(data['quiz_id'], data['src'], g.db).eval()
-    if flag == 1:
+    if flag:
         quiz_true(USER_ID, data['quiz_id'])
 
     data['user_problem_ans'] = flag
