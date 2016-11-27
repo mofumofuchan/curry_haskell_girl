@@ -32,31 +32,25 @@ $(function() {
 	console.info(responce_data);
 
 	
-	document.getElementById("phrase").textContent = "HelloWorld";
-	$(function(){
-	  $('#glcanvas').hide();
-	  $('#dance img').attr('src', "/static/img/correct.gif");  
-	});
-	/*
-	  if (responce_data['user_problem_ans'] == true) {
-	  document.getElementById("phrase").textContent = "HelloWorld";
+	if (responce_data['user_problem_ans'] == true) {
+	  // document.getElementById("phrase").textContent = "HelloWorld";
 	  $(function(){
-	  $('#glcanvas').hide();
-	  $('#dance img').attr('src', "/static/img/correct.gif");  
+	    $("#phrase").text = "HelloWorld";
+	    $('#glcanvas').hide();
+	    $('#dance img').attr('src', "/static/img/correct.gif");  
 	  });
-	  } else {
-	  document.getElementById("phrase").textContent = "しっぱい・・・";
+	} else {
+	  // document.getElementById("phrase").textContent = "しっぱい・・・";
 	  $(function(){
-	  $('#glcanvas').hide();
-	  $('#dance img').attr('src', "/static/img/incorrect.gif");  
+	    $('#phrase').test = "しっぱい・・・";
+	    $('#glcanvas').hide();
+	    $('#dance img').attr('src', "/static/img/incorrect.gif");  
 	  });
-
-	*/
-      }
-    },
-	   dataType: "json"
-	  });
-}
+	}
+      },
+      dataType: "json"
+    });
+  }
   $.ajax({
     contentType: 'application/json',
     type: 'POST',
@@ -69,4 +63,4 @@ $(function() {
     },
     dataType: "json"
   });
- });
+});
