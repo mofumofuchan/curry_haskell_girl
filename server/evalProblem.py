@@ -40,5 +40,5 @@ class EvalProblem(object):
             ans = ''.join(tmp.fetchone())
             with open("tmp.txt", "r", encoding='utf-8') as read_file:
                 if read_file.read().strip() == ans:
-                    return True
+                    return True, ans
             return False

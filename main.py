@@ -83,11 +83,14 @@ def quiz_answer():
         'quiz_id': request.json['quiz_id'],
         'src': request.json['src']
     }
-    flag = EvalProblem(data['quiz_id'], data['src'], g.db).eval()
+    return_data = EvalProblem(data['quiz_id'], data['src'], g.db).eval()
+    flag = return_data[0]
+    answer = return_data[1]
     if flag:
         quiz_true(USER_ID, data['quiz_id'])
 
     data['user_problem_ans'] = flag
+    data['answer'] = answer
     response = json.dumps(data, ensure_ascii=False, sort_keys=True)
     return Response(response, mimetype='application/json')
 
