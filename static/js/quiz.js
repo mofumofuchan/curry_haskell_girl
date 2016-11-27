@@ -19,9 +19,9 @@ $(function() {
 
   function judgeSource() {
     var src = editor.getValue();
-    var id = '0';
+    var id = '1';
     var send_data = {quiz_id:id, src:src};
-   
+    
     $.ajax({
       contentType: 'application/json',
       type: 'POST',
@@ -31,25 +31,32 @@ $(function() {
 	console.info('answer: ok');
 	console.info(responce_data);
 
-	if (responce_data['user_problem_ans'] == true) {
+	
+	document.getElementById("phrase").textContent = "HelloWorld";
+	$(function(){
+	  $('#glcanvas').hide();
+	  $('#dance img').attr('src', "/static/img/correct.gif");  
+	});
+	/*
+	  if (responce_data['user_problem_ans'] == true) {
 	  document.getElementById("phrase").textContent = "HelloWorld";
-	  // document.getElementById("character").src="/static/img/test0.gif";
-	   $(function(){
-	     $('#glcanvas').hide();
-	     $('#dance img').attr('src', "/static/img/correct.gif");  
-	   });
-	} else {
+	  $(function(){
+	  $('#glcanvas').hide();
+	  $('#dance img').attr('src', "/static/img/correct.gif");  
+	  });
+	  } else {
 	  document.getElementById("phrase").textContent = "しっぱい・・・";
-	   $(function(){
-	     $('#glcanvas').hide();
-	     $('#dance img').attr('src', "/static/img/incorrect.gif");  
-	   });
-	  
-	}
-      },
-      dataType: "json"
-    });
-  }
+	  $(function(){
+	  $('#glcanvas').hide();
+	  $('#dance img').attr('src', "/static/img/incorrect.gif");  
+	  });
+
+	*/
+      }
+    },
+	   dataType: "json"
+	  });
+}
   $.ajax({
     contentType: 'application/json',
     type: 'POST',
@@ -62,4 +69,4 @@ $(function() {
     },
     dataType: "json"
   });
-});
+ });
