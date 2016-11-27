@@ -49,7 +49,7 @@ $(function() {
 
 
 	if (responce_data['user_problem_ans'] == true) {
-	  document.getElementById("phrase").textContent = "HelloWorld";
+	  document.getElementById("phrase").textContent = "やったね！";
 	  // document.getElementById("character").src="/static/img/test0.gif";
 	   $(function(){
 	     $('#glcanvas').hide();
