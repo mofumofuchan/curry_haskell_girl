@@ -20,19 +20,21 @@ body {
 }
 .list-content > ul {
   list-style: none;
+  margin-right: 35px;
 }
 
 .list-content > ul > li{
   margin: 5px;
-  font-size: 30px;
+  font-size: 20px;
   height: 50px;
   background-color: #a60087;
   padding-top: 15px;
   padding-left: 15px;
   border-radius: 15px;
+  color: #fff;
 }
 .list-content > ul > li:hover{
-  color: #fff;
+  color: #000;
   background-color: #ee86ea;
   cursor: pointer;
 }
