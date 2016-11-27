@@ -17,9 +17,9 @@
       <script src="{{ url_for('static', filename='js/live2d.min.js') }}"></script>
       <!-- User's Script -->
       <script src="{{ url_for('static', filename='js/Simple.js') }}"></script>
-
+      
       <canvas id="glcanvas" width = "512px" height="512px" style="border:dashed 1px #CCC"></canvas>
-
+      <img>
 
       <div id="phrase"></div>
     </div>
@@ -47,6 +47,9 @@
 <a id="mod" rel="leanModal" href="#modal" style=""></a>
 <img style="display:none" src="{{ url_for('static', filename='img/test0.gif') }}" alt="">
 <img style="display:none" src="{{ url_for('static', filename='img/test1.png') }}" alt="">
+<img style="display:none" src="{{ url_for('static', filename='img/correct.gif') }}" alt="">
+<img style="display:none" src="{{ url_for('static', filename='img/incorrect.gif') }}" alt="">
+
 {% endblock %}
 
 {% block js %}
