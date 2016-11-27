@@ -6,7 +6,7 @@ from functools import wraps
 import sqlite3
 import json
 
-DATABASE = './curry_haskell_girl.db'
+DATABASE = '/Users/sh07_bell/tmp/curry_haskell_girl/curry_haskell_girl.db'
 app = Flask(__name__)
 app.config.from_object(__name__)
 
@@ -82,11 +82,8 @@ def quiz_answer():
         'quiz_id': request.json['quiz_id'],
         'src': request.json['src']
     }
-    cursor = g.db.cursor()
-    cursor.execute("select quiz_ans from quiz where quiz_id=?", (data['quiz_id'],))
-    quiz = cursor.fetchone()
-    flag = EvalProblem(quiz, data['src']).eval()
-    if flag:
+    flag = EvalProblem(data['quiz_id'], data['src'], g.db).eval()
+    if flag == 1:
         quiz_true(USER_ID, data['quiz_id'])
 
     data['user_problem_ans'] = flag
