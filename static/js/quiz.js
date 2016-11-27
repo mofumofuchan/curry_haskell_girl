@@ -10,7 +10,7 @@ $(function() {
 	editor.getSession().setUseWrapMode(true);
 	editor.getSession().setTabSize(2);
 
-	var initSrc = 'if __name__ == "__main__":\n  #ここをうめてね！';
+	var initSrc = $('#hint').html();
 	editor.setValue(initSrc);
 
 	$('#back').click(function() { location.href='/'; });

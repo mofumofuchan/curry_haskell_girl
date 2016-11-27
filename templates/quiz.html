@@ -27,10 +27,11 @@
   <div class="col span-6 fill">
     <div id="question">
       <h1>問題</h1>
-      <p>{{ quiz_text }}</p>
+      <p>{{ quiz_text|safe }}</p>
     </div>
     <div id="code">
-      <div id="editor">{{ quiz_hint }}</div>
+      <div id="editor"></div>
+      <div id="hint" style="display:none">{{ quiz_hint }}</div>
     </div>
     <div id="action">
       <img id="back" src="{{ url_for('static', filename='img/return.png') }}" alt="">
