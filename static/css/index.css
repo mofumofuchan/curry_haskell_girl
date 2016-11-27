@@ -1,0 +1,44 @@
+body {
+  background-image: url('/static/img/index-back.png');
+}
+
+.list { position: absolute;
+  right: 0px;
+}
+
+.list > img {
+  height: 600px;
+  margin-right: 100px;
+  z-index: 499;
+}
+.list-content {
+  position: absolute;
+  width: 463px;
+  bottom: 67px;
+  left: 100px;
+  height: 293px;
+}
+.list-content > ul {
+  list-style: none;
+}
+
+.list-content > ul > li{
+  margin: 5px;
+  font-size: 30px;
+  height: 50px;
+  background-color: #a60087;
+  padding-top: 15px;
+  padding-left: 15px;
+  border-radius: 15px;
+}
+.list-content > ul > li:hover{
+  color: #fff;
+  background-color: #ee86ea;
+  cursor: pointer;
+}
+.chara > img {
+  height: 550px;
+  margin: 0px;
+  bottom: 0px;
+  z-index: 500;
+}

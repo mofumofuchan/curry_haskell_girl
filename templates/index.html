@@ -1,72 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-  <head>
+{% block head %}
+<link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+{% endblock %}
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Current Haskell Girls</title>
-
-    <!-- Toolkit CSS -->
-    <link href="../static/css/toolkit.min.css" rel="stylesheet">
-    <link href="../static/css/main.css" rel="stylesheet">
-    <link href="../static/css/quiz.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-  </head>
-
-  <body onload="Simple()">
-    <!-- 2 columns of equal width -->
-    <div class="grid fill">
-      <div class="col span-6 fill">
-        <div id="dance">
-	  <!-- Live2D Library -->
-	  <script src="../static/js/live2d.min.js"></script>
-	  <!-- User's Script -->
-	  <script src="../static/js/Simple.js"></script>
-	  <!-- <script>Simple();</script> -->
-	  <canvas id="glcanvas" width = "512px" height="512px" style="border:dashed 1px #CCC"></canvas>
-	  <!--
-	  <img id="character" src="../static/img/test1.png" alt="">
-          -->
-	  <div id="phrase"></div>
-        </div>
-      </div>
-      <div class="col span-6 fill">
-        <div id="question">
-          <h1>問題</h1>
-          <p>下のコードをうめて、しゃべらせてみよう</p>
-        </div>
-        <div id="code">
-          <div id="editor">
-          </div>
-        </div>
-        <div id="action">
-            <img id="back" src="../static/img/return.png" alt="">
-            <img id="reset" src="../static/img/reset.png" alt="">
-            <img id="judge" src="../static/img/judge.png" alt="">
-        </div>
+{% block main %}
+<div class="grid">
+  <div class="col span-4 fill">
+    <div class="chara">
+      <img src="{{ url_for('static', filename='img/test1.png') }}" alt="">
+    </div>
+  </div>
+  <div class="col span-8 fill">
+    <div class="list">
+      <img src="{{ url_for('static', filename='img/quiz_list.png') }}" alt="">
+      <div class="list-content">
+        <ul>
+          <li onclick="location.href='/quiz/1';">問題1: しゃべらせてみよう</li>
+          <li onclick="location.href='/quiz/2';">問題2: </li>
+          <li onclick="location.href='/quiz/3';">問題3: </li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <!-- jQuery -->
-    <script src="../static/js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../static/js/toolkit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
-    <script src="../static/js/quiz.js"></script>
+</div>
+{% endblock %}
 
-
-  </body>
-
-</html>
+{% block js %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+</body></html>
