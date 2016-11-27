@@ -115,6 +115,20 @@ def request_quiz():
     response = json.dumps(request_data, ensure_ascii=False, sort_keys=False)
     return Response(response, mimetype='application/json')
 
+@app.route('/story', methods=['POST'])
+@consumes
+def get_story():
+    quiz_section_id = {
+        "quiz_id": request.json["quiz_id"]
+    }
+    cursor = g.db.cursor()
+    cursor.execute("select * from story where=?", (quiz_section_id["quiz_id"], ))
+    tmp = cursor.fetchone()
+    data = {
+        "story": tmp[1]
+    }
+    response = json.dumps(data, ensure_ascii=False, sort_keys=False)
+    return Response(response, mimetype='application/json')
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080, debug=True)
