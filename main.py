@@ -96,7 +96,7 @@ def quiz_answer():
 
 def quiz_true(user_id, quiz_id):
     cursor = g.db.cursor()
-    cursor.execute("select answered from answers where user_id=?", (user_id,))
+    cursor.execute("select answered from answers where quiz_id=?", (user_id,))
     tmp = cursor.fetchone()
     if tmp is None:
         g.db.execute("insert into answers('user_id','answered') values(?, ?)", (user_id, quiz_id))
