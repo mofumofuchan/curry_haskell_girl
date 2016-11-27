@@ -17,7 +17,7 @@
       <script src="{{ url_for('static', filename='js/live2d.min.js') }}"></script>
       <!-- User's Script -->
       <script src="{{ url_for('static', filename='js/Simple.js') }}"></script>
-      
+
       <canvas id="glcanvas" width = "512px" height="512px" style="border:dashed 1px #CCC"></canvas>
       <img>
 
@@ -31,7 +31,7 @@
     </div>
     <div id="code">
       <div id="editor"></div>
-      <div id="hint" style="display:none">{{ quiz_hint }}</div>
+      <div id="hint" style="display:none">{{ quiz_hint|safe }}</div>
     </div>
     <div id="action">
       <img id="back" src="{{ url_for('static', filename='img/return.png') }}" alt="">
@@ -49,7 +49,8 @@
 <img style="display:none" src="{{ url_for('static', filename='img/test1.png') }}" alt="">
 <img style="display:none" src="{{ url_for('static', filename='img/correct.gif') }}" alt="">
 <img style="display:none" src="{{ url_for('static', filename='img/incorrect.gif') }}" alt="">
-
+<img style="display:none" src="{{ url_for('static', filename='img/swingright.gif') }}" alt="">
+<div id='quiz_id'>{{ quiz_id }}</div>
 {% endblock %}
 
 {% block js %}
