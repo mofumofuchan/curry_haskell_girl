@@ -13,11 +13,13 @@ app.config.from_object(__name__)
 USER_ID = 1
 TRUE_NUMBER = 1
 
-
 """ ----- quiz ----- """
 """ ----- SQL ----- """
+
+
 def connect_db():
-   return sqlite3.connect(app.config['DATABASE'])
+    return sqlite3.connect(app.config['DATABASE'])
+
 
 def init_db():
     with closing(connect_db()) as db:
@@ -25,15 +27,18 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
+
 @app.teardown_request
 def teardown_request(exeption):
-   db = getattr(g, 'db', None)
-   if db is not None:
-       db.close()
+    db = getattr(g, 'db', None)
+    if db is not None:
+        db.close()
+
 
 @app.before_request
 def before_request():
-   g.db = connect_db()
+    g.db = connect_db()
+
 
 def consumes(content_type):
     def _consumes(function):
@@ -48,16 +53,17 @@ def consumes(content_type):
     return _consumes
 
 
-#root
+# root
 @app.route('/')
 def index():
     return render_template('index.html', name="test", title="hello")
 
-#quiz_page
+
+# quiz_page
 @app.route('/quiz/<int:quiz_id>/', methods=['GET'])
 def quiz_page(quiz_id):
     cursor = g.db.cursor()
-    cursor.execute("select * from quiz where quiz_id=?", (quiz_id, ))
+    cursor.execute("select * from quiz where quiz_id=?", (quiz_id,))
     quiz = cursor.fetchone()
     print(quiz)
     return render_template('quiz.html', quiz_text=quiz[2], quiz_hint=quiz[3])
@@ -68,8 +74,7 @@ def sample():
     return render_template('simple2.html')
 
 
-
-#request_quiz_anser_judg
+# request_quiz_anser_judg
 @app.route('/answer/', methods=['POST'])
 @consumes('application/json')
 def quiz_answer():
@@ -77,13 +82,17 @@ def quiz_answer():
         'quiz_id': request.json['quiz_id'],
         'src': request.json['src']
     }
-    flag = EvalProblem(data['src']).eval()
+    cursor = g.db.cursor()
+    cursor.execute("select quiz_ans from quiz where user_id=?", (data['quiz_id'],))
+    quiz = cursor.fetchone()
+    flag = EvalProblem(quiz, data['src']).eval()
     if flag:
         quiz_true(USER_ID, data['quiz_id'])
 
     data['user_problem_ans'] = flag
     response = json.dumps(data, ensure_ascii=False, sort_keys=True)
     return Response(response, mimetype='application/json')
+
 
 def quiz_true(user_id, quiz_id):
     cursor = g.db.cursor()
@@ -95,7 +104,8 @@ def quiz_true(user_id, quiz_id):
     else:
         print("ok")
 
-#request_quiz
+
+# request_quiz
 @app.route('/request/', methods=['POST'])
 @consumes('application/json')
 def request_quiz():
@@ -104,7 +114,7 @@ def request_quiz():
     }
     print(data)
     cursor = g.db.cursor()
-    cursor.execute("select * from quiz where quiz_id=?", (data['quiz_id'], ))
+    cursor.execute("select * from quiz where quiz_id=?", (data['quiz_id'],))
     tmp = cursor.fetchone()
     request_data = {
         "quiz_id": tmp[0],
@@ -115,6 +125,7 @@ def request_quiz():
     response = json.dumps(request_data, ensure_ascii=False, sort_keys=False)
     return Response(response, mimetype='application/json')
 
+
 @app.route('/story/', methods=['POST'])
 @consumes('application/json')
 def get_story():
@@ -122,13 +133,14 @@ def get_story():
         "quiz_id": request.json["quiz_id"]
     }
     cursor = g.db.cursor()
-    cursor.execute("select * from story where quiz_section_id=?", (quiz_section_id["quiz_id"], ))
+    cursor.execute("select * from story where quiz_section_id=?", (quiz_section_id["quiz_id"],))
     tmp = cursor.fetchone()
     data = {
         "story": tmp[1]
     }
     response = json.dumps(data, ensure_ascii=False, sort_keys=False)
     return Response(response, mimetype='application/json')
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080, debug=True)
