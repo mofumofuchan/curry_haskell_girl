@@ -48,12 +48,19 @@ var Simple = function() {
   
     // アイカツキャラモデル
     this.modelDef = {
-        "type":"Live2D Model Setting",
-        "name":"Aikatsu",
-        "model":"/static/assets/model0.2048/model.moc",
-        "textures":[
-            "/static/assets/model0.2048/model.2048/texture_00.png",
-        ]
+      "type":"Live2D Model Setting",
+      "name":"Aikatsu",
+      "model":"/static/assets/model0.2048/model.moc",
+      "textures":[
+        "/static/assets/model0.2048/model.2048/texture_00.png",
+      ],
+      "motion":[
+	"/static/assets/model0.2048/motion/correct.mtn",
+	"/static/assets/model0.2048/motion/default.mtn",
+	"/static/assets/model0.2048/motion/incorrect.mtn",
+	"/static/assets/model0.2048/motion/swingLeft.mtn",
+	"/static/assets/model0.2048/motion/swingR.mtn"
+      ]
     };
 
     // Live2Dの初期化
@@ -62,7 +69,7 @@ var Simple = function() {
     // canvasオブジェクトを取得
   canvas = $("#glcanvas").get(0);
   
-  console.log(canvas);
+  // console.log(canvas);
   
     // コンテキストを失ったとき
     canvas.addEventListener("webglcontextlost", function(e) {
@@ -117,7 +124,7 @@ Simple.initLoop = function(canvas/*HTML5 canvasオブジェクト*/)
     Simple.loadBytes(modelDef.model, function(buf){
         live2DModel = Live2DModelWebGL.loadModel(buf);
     });
-
+  
     // テクスチャの読み込み
     var loadCount = 0;
     for(var i = 0; i < modelDef.textures.length; i++){
@@ -135,6 +142,12 @@ Simple.initLoop = function(canvas/*HTML5 canvasオブジェクト*/)
         })( i );
     }
 
+  // モーションのロード
+  Simple.loadBytes(modelDef.motion[1], function(buf){
+    motion = new Live2DMotion.loadMotion(buf);
+  });
+  motionMgr = new L2DMotionManager();
+  
     //------------ 描画ループ ------------
 
     (function tick() {
@@ -186,6 +199,14 @@ Simple.draw = function(gl/*WebGLコンテキスト*/)
         live2DModel.setMatrix(matrix4x4);
     }
 
+  // モーションが終了していたらモーションの再生
+  if(motionMgr.isFinished()){
+    motionMgr.startMotion(motion);
+  }
+  motionMgr.updateParam(live2DModel);
+  
+
+  /*
     // キャラクターのパラメータを適当に更新
     var t = UtSystem.getUserTimeMSec() * 0.001 * 2 * Math.PI; //1秒ごとに2π(1周期)増える
     var cycle = 3.0; //パラメータが一周する時間(秒)
@@ -193,7 +214,8 @@ Simple.draw = function(gl/*WebGLコンテキスト*/)
     live2DModel.setParamFloat("PARAM_ANGLE_X", 30 * Math.sin(t/cycle));
     live2DModel.setParamFloat("PARAM_EYE_R_OPEN", 1 * Math.sin(t/cycle));
     live2DModel.setParamFloat("PARAM_EYE_L_OPEN", 1 * Math.sin(t/cycle));
-
+  */
+  
     // Live2Dモデルを更新して描画
     live2DModel.update(); // 現在のパラメータに合わせて頂点等を計算
     live2DModel.draw();   // 描画
