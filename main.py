@@ -61,7 +61,7 @@ def index():
 
 # quiz_page
 @app.route('/quiz/<int:quiz_id>/', methods=['GET'])
-def quiz_page(quiz_id)
+def quiz_page(quiz_id):
     cursor = g.db.cursor()
     cursor.execute("select * from quiz where quiz_id=?", (quiz_id,))
     quiz = cursor.fetchone()
