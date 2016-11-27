@@ -1,6 +1,7 @@
 # coding:utf-8
 import sys
 import traceback
+import sqlite3
 
 
 def create_file():
@@ -8,9 +9,10 @@ def create_file():
 
 
 class EvalProblem(object):
-    def __init__(self, answer, src):
-        self.answer = answer
+    def __init__(self, src, database):
         self.src = src
+        self.db = database
+        self.dbc = self.db.cursor()
 
     def eval(self):
         try:
@@ -29,7 +31,9 @@ class EvalProblem(object):
             # print('--------------------------------------------')
             return False
         else:
+            tmp = self.dbc.execute("select quiz_ans from quiz where quiz_id = 1")
+            ans = ''.join(tmp.fetchone())
             with open("tmp.txt", "r", encoding='utf-8') as read_file:
-                if self.answer in read_file.read().strip():
+                if ans in read_file.read().strip():
                     return True
             return False
