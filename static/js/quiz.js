@@ -41,4 +41,16 @@ $(function() {
 			dataType: "json"
 		});
 	}
+    $.ajax({
+        contentType: 'application/json',
+        type: 'POST',
+        url: "/story/",
+        data: JSON.stringify({quiz_id:'1'}),
+        success: function(responce_data) {
+            console.info('answer: ok');
+            console.info(responce_data);
+            $('#story').html(responce_data['story']);
+        },
+        dataType: "json"
+    });
 });

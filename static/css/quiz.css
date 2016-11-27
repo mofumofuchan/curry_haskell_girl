@@ -1,67 +1,74 @@
 body {
-    background-image: url('../img/background.png');
+  background-image: url('../img/background.png');
 }
 
 #editor {
-    position: absolute;
-    top: 30%;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 60%;
+  position: absolute;
+  top: 30%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 60%;
 }
 #dance {
-    margin: 4%;
-    height: 92%;
-    background-color: rgba(255, 255, 255, 0.67);
+  margin: 4%;
+  height: 92%;
+  background-color: rgba(255, 255, 255, 0.67);
 }
 #dance > img {
-    display: block;
-    margin: auto;
-    height: 80%;
+  display: block;
+  margin: auto;
+  height: 80%;
 }
 
 #question {
-    height: 30%;
+  height: 30%;
 }
 
 #question > h1, p {
-    font-weight: bold;
-    font-size: 30px;
-    text-shadow: #fff 2px 2px 0px, #fff -2px 2px 0px,
-    #fff 2px -2px 0px, #fff -2px -2px 0px;
+  font-weight: bold;
+  font-size: 30px;
+  text-shadow: #fff 2px 2px 0px, #fff -2px 2px 0px,
+  #fff 2px -2px 0px, #fff -2px -2px 0px;
+  line-height: 35px;
 }
 
 .question {
-    height: 100%;
+  height: 100%;
 }
 .question > .q1{
-    background-color: #6fea44;
+  background-color: #6fea44;
 }
 .question > .q2{
-    background-color: #6fea44;
+  background-color: #6fea44;
 }
 .question > .q3{
-    height: 100%;
-    background-color: #6fea44;
+  height: 100%;
+  background-color: #6fea44;
 }
 
 #code {
-    height: 60%;
+  height: 60%;
 }
 
 #action {
-    height: 10%;
+  height: 10%;
 }
 #action > img {
-    margin: 1%;
-    width: 30%;
+  margin: 1%;
+  width: 30%;
 }
 
 #phrase {
-    margin: 20px;
-    height: 10%;
-    border: 2px solid #7ac9f6;
-    background-color: rgba(255, 255, 255, 0.5);
+  margin: 20px;
+  height: 10%;
+  border: 2px solid #7ac9f6;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
+.btn {
+  height: 40px;
+  width: 80px;
+  background-color: #aaa;
+  margin: 0px 0px;
+}

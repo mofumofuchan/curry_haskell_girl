@@ -35,6 +35,19 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url_for('static', filename='js/toolkit.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery.leanModal.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+$(function() {
+  $("a[rel*=leanModal]").leanModal({
+    top: 80,
+    overlay : 0.7,
+    closeButton: ".cancel"
+  });
+});
+$(function(){
+  $('#mod').trigger('click');
+});
+    </script>
     {% block js %}
     {% endblock %}
 

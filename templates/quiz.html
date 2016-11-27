@@ -39,7 +39,12 @@
       <img id="judge" src="{{ url_for('static', filename='img/judge.png') }}" alt="">
     </div>
   </div>
+  <div id="modal" class="col span-8 fill">
+    <div id="story" class="modal-content">
+    </div>
+  </div>
 </div>
+<a id="mod" rel="leanModal" href="#modal" style=""></a>
 <img style="display:none" src="{{ url_for('static', filename='img/test0.gif') }}" alt="">
 <img style="display:none" src="{{ url_for('static', filename='img/test1.png') }}" alt="">
 {% endblock %}
