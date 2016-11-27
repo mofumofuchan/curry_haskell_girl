@@ -71,7 +71,7 @@ $(function() {
     contentType: 'application/json',
     type: 'POST',
     url: "/story/",
-    data: JSON.stringify({quiz_id:'1'}),
+    data: JSON.stringify({quiz_id:quiz_id}),
     success: function(responce_data) {
       console.info('answer: ok');
       console.info(responce_data);
