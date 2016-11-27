@@ -13,7 +13,7 @@ $(function() {
 	var initSrc = 'if __name__ == "__main__":\n  #ここをうめてね！';
 	editor.setValue(initSrc);
 
-	$('#back').click(function() {alert("back index pages")});
+	$('#back').click(function() { location.href='/'; });
 	$('#reset').click(function() {editor.setValue(initSrc)});
 	$('#judge').click(function() {judgeSource();});
 
