@@ -21,12 +21,7 @@ $(function() {
     var src = editor.getValue();
     var id = '0';
     var send_data = {quiz_id:id, src:src};
-    
-    console.log("hello");
-    $(function(){
-      $('#glcanvas').hide();
-      $('#dance img').attr('src', "/static/img/correct.gif");  
-    });
+   
     $.ajax({
       contentType: 'application/json',
       type: 'POST',
@@ -39,8 +34,17 @@ $(function() {
 	if (responce_data['user_problem_ans'] == true) {
 	  document.getElementById("phrase").textContent = "HelloWorld";
 	  // document.getElementById("character").src="/static/img/test0.gif";
+	   $(function(){
+	     $('#glcanvas').hide();
+	     $('#dance img').attr('src', "/static/img/correct.gif");  
+	   });
 	} else {
 	  document.getElementById("phrase").textContent = "しっぱい・・・";
+	   $(function(){
+	     $('#glcanvas').hide();
+	     $('#dance img').attr('src', "/static/img/incorrect.gif");  
+	   });
+	  
 	}
       },
       dataType: "json"
