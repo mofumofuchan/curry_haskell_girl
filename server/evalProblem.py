@@ -28,12 +28,14 @@ class EvalProblem(object):
             # print('--------------------------------------------')
             print(traceback.format_exc(sys.exc_info()[2]))
             # print('--------------------------------------------')
-            return False
+            return False, None
         except TypeError:
             # print('--------------------------------------------')
             print(traceback.format_exc(sys.exc_info()[2]))
             # print('--------------------------------------------')
-            return False
+            return False, None
+        except:
+            return False, None
         else:
             print(shake())
             tmp = self.dbc.execute("select quiz_ans from quiz where quiz_id=?", (self.id,))
@@ -41,4 +43,4 @@ class EvalProblem(object):
             with open("tmp.txt", "r", encoding='utf-8') as read_file:
                 if read_file.read().strip() == ans:
                     return True, ans
-            return False
+            return False, None
