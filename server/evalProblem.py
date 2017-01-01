@@ -21,19 +21,23 @@ class EvalProblem(object):
     def eval(self):
         try:
             create_file()
-            exec(self.src)
+            exec(self.src) # TODO セキュリティに考慮する
             sys.stdout.close()
             sys.stdout = sys.__stdout__
         except SyntaxError:
-            # print('--------------------------------------------')
-            print(traceback.format_exc(sys.exc_info()[2]))
-            # print('--------------------------------------------')
-            return False
+            sys.stdout.close()
+            sys.stdout = sys.__stdout__
+            # TODO SyntaxErrorであると返すようにしたい
+            return False, None
         except TypeError:
-            # print('--------------------------------------------')
-            print(traceback.format_exc(sys.exc_info()[2]))
-            # print('--------------------------------------------')
-            return False
+            sys.stdout.close()
+            sys.stdout = sys.__stdout__
+            # TODO TypeErrorであると返すようにしたい
+            return False, None
+        except:
+            sys.stdout.close()
+            sys.stdout = sys.__stdout__
+            return False, None
         else:
             print(shake())
             tmp = self.dbc.execute("select quiz_ans from quiz where quiz_id=?", (self.id,))
@@ -41,4 +45,4 @@ class EvalProblem(object):
             with open("tmp.txt", "r", encoding='utf-8') as read_file:
                 if read_file.read().strip() == ans:
                     return True, ans
-            return False
+            return False, None
