@@ -25,16 +25,22 @@ class EvalProblem(object):
             sys.stdout.close()
             sys.stdout = sys.__stdout__
         except SyntaxError:
+            sys.stdout.close()
+            sys.stdout = sys.__stdout__
             # print('--------------------------------------------')
-            print(traceback.format_exc(sys.exc_info()[2]))
+            # print(traceback.format_exc(sys.exc_info()[2]))
             # print('--------------------------------------------')
             return False, None
         except TypeError:
+            sys.stdout.close()
+            sys.stdout = sys.__stdout__
             # print('--------------------------------------------')
-            print(traceback.format_exc(sys.exc_info()[2]))
+            # print(traceback.format_exc(sys.exc_info()[2]))
             # print('--------------------------------------------')
             return False, None
         except:
+            sys.stdout.close()
+            sys.stdout = sys.__stdout__
             return False, None
         else:
             print(shake())
