@@ -21,22 +21,18 @@ class EvalProblem(object):
     def eval(self):
         try:
             create_file()
-            exec(self.src)
+            exec(self.src) # TODO セキュリティに考慮する
             sys.stdout.close()
             sys.stdout = sys.__stdout__
         except SyntaxError:
             sys.stdout.close()
             sys.stdout = sys.__stdout__
-            # print('--------------------------------------------')
-            # print(traceback.format_exc(sys.exc_info()[2]))
-            # print('--------------------------------------------')
+            # TODO SyntaxErrorであると返すようにしたい
             return False, None
         except TypeError:
             sys.stdout.close()
             sys.stdout = sys.__stdout__
-            # print('--------------------------------------------')
-            # print(traceback.format_exc(sys.exc_info()[2]))
-            # print('--------------------------------------------')
+            # TODO TypeErrorであると返すようにしたい
             return False, None
         except:
             sys.stdout.close()
